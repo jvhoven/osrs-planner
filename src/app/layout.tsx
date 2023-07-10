@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Wrapper } from '@/components/wrapper'
+import StyledComponentsRegistry from '../../lib/registry'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Main>
-          <Wrapper>
-            {children}
-          </Wrapper>
-        </Main>
+        <StyledComponentsRegistry>
+          <Main>
+            <Wrapper>
+              {children}
+            </Wrapper>
+          </Main>
+        </StyledComponentsRegistry>
       </body>
     </html>
   )
