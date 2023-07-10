@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/osrs-api/:path*",
+      "destination": "https://secure.runescape.com/m=hiscore_oldschool/:path*"
+    }
+  ]
 }

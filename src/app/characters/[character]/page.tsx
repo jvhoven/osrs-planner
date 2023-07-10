@@ -1,4 +1,5 @@
-'use client'
+"use client"
+
 import { useLiveQuery } from 'dexie-react-hooks'
 import Image from 'next/image'
 
@@ -7,9 +8,7 @@ import { db } from '@/models/db'
 import styled from 'styled-components'
 import { Button } from '@/components/button'
 import Link from 'next/link'
-import { ContentState, ContentStateContainer } from '@/components/content-state'
-import type { Character } from '@/lib/types'
-import { ReactNode } from 'react'
+import { ContentStateContainer } from '@/components/content-state'
 import { AccountName, AccountNameContainer } from '@/components/account-name'
 import { SkillsOverview } from '@/components/skills/overview'
 import { Hoverable } from '@/styles'
