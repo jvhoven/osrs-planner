@@ -5,7 +5,7 @@ import { Header } from '@/components/header'
 import { Button } from '@/components/button'
 import Link from 'next/link'
 
-export default function () {
+export default function CharactersPage() {
   return (
     <>
       <Header title='Characters'>
@@ -17,3 +17,4 @@ export default function () {
     </>
   )
 }
+
