@@ -54,7 +54,7 @@ export function ContentState<T>(props: Props<T>) {
         <ContentStateContainer>
           <Wrapper>
             <Image
-              src='/osrs-planner/gnome-child.svg'
+              src='/gnome-child.svg'
               alt=''
               width='350'
               height='350'

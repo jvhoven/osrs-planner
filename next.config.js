@@ -9,8 +9,7 @@ const nextConfig = {
         destination: "https://secure.runescape.com/m=hiscore_oldschool/:path*"
       },
     ]
-  },
-  basePath: "/osrs-planner",
+  }
 }
 
 module.exports = nextConfig

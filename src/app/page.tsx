@@ -24,9 +24,9 @@ const MainPageContainer = styled.section`
 export default function Page() {
   return (
     <MainPageContainer>
-      <Image src='/osrs-planner/logo.svg' width='250' height='125' alt='' />
+      <Image src='/logo.svg' width='250' height='125' alt='' />
       <h4>Making the forgettable unforgettable</h4>
-      <Image className="banner" src='/osrs-planner/create-character.svg' alt='' width='500' height='500' />
+      <Image className="banner" src='/create-character.svg' alt='' width='500' height='500' />
       <Button>
         <Link href='/characters/'>Get started</Link>
       </Button>

@@ -97,7 +97,7 @@ export default function Page() {
             document.getElementById('import').showModal()
           }}
           title='Import from HiScores'
-          illustration='/osrs-planner/illustrations/maxed-nerd.svg'
+          illustration='/illustrations/maxed-nerd.svg'
           body={
             <p>
               Already have a RuneScape character? This will import your skills
@@ -112,7 +112,7 @@ export default function Page() {
         />
         <Card
           title='From scratch'
-          illustration='/osrs-planner/illustrations/noob.svg'
+          illustration='/illustrations/noob.svg'
           onClick={() => {
             // @ts-expect-error React doesn't understand native modals yet
             document.getElementById('create').showModal()

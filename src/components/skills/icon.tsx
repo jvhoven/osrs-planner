@@ -7,7 +7,7 @@ export const SkillIconContainer = styled.div``
 export const SkillIcon = ({ name }: { name: SkillName }) => {
   return (
     <SkillIconContainer>
-      <Image src={`/osrs-planner/skills/${name}.svg`} alt={name} width='25' height='25' />
+      <Image src={`/skills/${name}.svg`} alt={name} width='25' height='25' />
     </SkillIconContainer>
   )
 }

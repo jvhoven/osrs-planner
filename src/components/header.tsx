@@ -42,7 +42,7 @@ export const Header: FunctionComponent<Props> = ({ title, children }) => {
       <section className='title'>
         <section className='container'>
           <Link href='/'>
-            <Image src='/osrs-planner/logo.svg' alt='' width='120' height='100' />
+            <Image src='/logo.svg' alt='' width='120' height='100' />
           </Link>
           <h2>{title}</h2>
         </section>
