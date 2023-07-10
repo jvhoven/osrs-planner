@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>defence</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="defence" transform="translate(0.467181, 1.048318)" stroke="#FFFFFF">
+            <polyline id="Path-11" points="0 0.390124518 16.1223692 0.390124518 16.1223692 13.3939595 11.1335099 18.3828188 5.1549463 18.3828188 0.166086992 13.3939595 0.166086992 -7.06664396e-14"></polyline>
+            <polygon id="Path-12" points="7.06220068 3.52343042 9.00041883 3.52343042 9.00041883 7.4642562 13.0045925 7.4642562 13.0045925 9.45048238 9.00041883 9.45048238 9.00041883 14.521533 7.06220068 14.521533 7.06220068 9.45048238 2.95434101 9.45048238 2.95434101 7.4642562 7.06220068 7.4642562"></polygon>
+        </g>
+    </g>
+</svg>
