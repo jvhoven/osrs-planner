@@ -11,10 +11,6 @@ const nextConfig = {
     ]
   },
   basePath: "/osrs-planner",
-  output: "export",
-  images: {
-    unoptimized: true
-  }
 }
 
 module.exports = nextConfig
