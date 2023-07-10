@@ -30,7 +30,7 @@ export const AccountName: FunctionComponent<Props> = ({
   return (
     <AccountNameContainer>
       <AccountTypeIcon gamemode={gamemode} />
-      {React.createElement(tag, { children: rsn, className: 'rsn' })}
+      {React.createElement(tag, { className: 'rsn' }, rsn)}
     </AccountNameContainer>
   )
 }

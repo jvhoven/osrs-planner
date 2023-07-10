@@ -55,7 +55,7 @@ export const CreateCharacterModal: FunctionComponent<CreateCharacterModalProps> 
         router.push(`/characters/${formState.rsn}`);
       });
     }
-  }, [stats?.skills.overall.level, formState.rsn, formState.gamemode])
+  }, [stats?.skills.overall.level, formState.rsn, formState.gamemode, mode, router, stats])
 
   return (
     <Modal id={id} title={title}>
