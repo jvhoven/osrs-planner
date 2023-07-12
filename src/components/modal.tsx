@@ -9,6 +9,8 @@ type ModalProps = {
 }
 
 const Dialog = styled.dialog`
+  background-color: rgb(30, 30, 30);
+  color: #fff;
   box-shadow:
     0 0 #0000,
     0 0 #0000,

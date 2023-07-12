@@ -10,7 +10,6 @@ import {
   SKILLS,
 } from '@/lib/constants';
 
-
 async function fetchCharacter(url: string, { arg }: { arg: { rsn: string } }) {
   return fetch(`${url}?player=${encodeURIComponent(arg.rsn)}`).then(res => res.text());
 }
