@@ -154,7 +154,7 @@ export const FORMATTED_BOSS_NAMES: FormattedBossNames = {
   abyssalSire: 'Abyssal Sire',
   alchemicalHydra: 'Alchemical Hydra',
   artio: 'Artio',
-  barrows: 'Barrows Chests',
+  barrows: 'Barrows',
   bryophyta: 'Bryophyta',
   callisto: 'Callisto',
   calvarion: "Calvar'ion",

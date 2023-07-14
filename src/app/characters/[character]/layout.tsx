@@ -1,18 +1,11 @@
 "use client"
 
-import Image from "next/image";
-
-import { Button } from "@/components/button"
-import { ContentStateContainer } from "@/components/content-state"
-import { Wrapper } from "@/components/wrapper"
-import { db } from "@/models/db"
-import { useLiveQuery } from "dexie-react-hooks"
-import Link from "next/link"
-import { ReactNode } from "react"
-import { Hoverable } from "@/styles";
-import styled from "styled-components";
+import { AccountNameContainer } from "@/components/account-name";
+import { Button } from "@/components/button";
 import { Header } from "@/components/header";
-import { Character } from "@/lib/types";
+import Link from "next/link";
+import { ReactNode } from "react";
+import styled from "styled-components";
 
 const TwoColumn = styled.section`
   width: 100%;
@@ -34,36 +27,57 @@ const TwoColumn = styled.section`
 
 const Menu = styled.aside`
   ul {
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
+    margin-bottom: 1rem;
 
     li {
-      list-style: none;
-      padding: 1rem;
-      border: 1px solid white;
-      border-radius: 8px;
+      width: 100%;
       margin-bottom: 1rem;
+      display: block;
+      list-style: none;
+      border-radius: 8px;
 
-      ${Hoverable}
+      button {
+        text-align: left;
+        width: 100%;
+      }
     }
   }
 
   @media only screen and (max-width: 600px) {
     ul {
       flex-direction: row;
-
+    
       li {
         margin-right: 1rem;
+
+        button {
+            text-align: center;
+          }
+
+        &:last-child {
+            margin-right: 0;
+          }
       }
     }
   }
 `
 
+const CharacterLayoutContainer = styled.div`
+  width: 100%;
+
+  ${AccountNameContainer} {
+      margin-bottom: 2rem;
+    }
+`
+
 export default function CharacterLayout({ children, params: { character } }: { children: ReactNode, params: { character: string } }) {
   return (
-    <>
+    <CharacterLayoutContainer>
       <Header title='Character'>
         <Button>
           <Link href='/characters'>Back to characters</Link>
@@ -72,9 +86,21 @@ export default function CharacterLayout({ children, params: { character } }: { c
       <TwoColumn>
         <Menu>
           <ul>
-            <li>Skills</li>
-            <li>Items</li>
-            <li>Goals</li>
+            <li>
+              <Button>
+                <Link href={`/characters/${character}/skills`}>Skills</Link>
+              </Button>
+            </li>
+            <li>
+              <Button>
+                <Link href={`/characters/${character}/goals`}>Items</Link>
+              </Button>
+            </li>
+            <li>
+              <Button>
+                <Link href={`/characters/${character}/goals`}>Goals</Link>
+              </Button>
+            </li>
             <li>
               <Button>
                 <Link href={`/characters/${character}/activities`}>Activities</Link>
@@ -86,6 +112,6 @@ export default function CharacterLayout({ children, params: { character } }: { c
           {children}
         </section>
       </TwoColumn>
-    </>
+    </CharacterLayoutContainer>
   )
 }
