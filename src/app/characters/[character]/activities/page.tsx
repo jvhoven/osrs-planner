@@ -68,7 +68,7 @@ export default function Page({ params }: { params: { character: string } }) {
           <AccountName rsn={rsn} gamemode={gamemode} />
           <GridContainer $columns={3}>
             {Object.keys(bosses).map((boss) => (
-              <ActivityContainer>
+              <ActivityContainer key={boss}>
                 <div className="image">
                   <Image src={`/activities/bosses/${boss}.svg`} alt="" height="50" width="100" />
                 </div>
