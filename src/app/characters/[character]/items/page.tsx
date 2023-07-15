@@ -105,15 +105,13 @@ const ArmourSetup: FC<ArmourSetupProps> = ({ equipped = {} }) => {
   return (
     <ArmourSetupContainer>
       {(ITEM_SLOT.filter(slot => slot !== "two-handed") as Exclude<typeof ITEM_SLOT[number], "two-handed">[]).map(slot =>
-        <>
-          <div
-            key={slot}
-            className={slot}
-            style={{ gridArea: slot }}
-          >
-            {equipped[slot] !== undefined && <Image src={equipped[slot]?.image ?? ""} width="50" height="50" alt={equipped[slot]?.name ?? ""} />}
-          </div>
-        </>
+        <div
+          key={slot}
+          className={slot}
+          style={{ gridArea: slot }}
+        >
+          {equipped[slot] !== undefined && <Image src={equipped[slot]?.image ?? ""} width="50" height="50" alt={equipped[slot]?.name ?? ""} />}
+        </div>
       )}
     </ArmourSetupContainer>
   );
