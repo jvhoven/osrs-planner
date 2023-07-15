@@ -92,11 +92,11 @@ const INVENTORY_SIZE = 28;
 const Inventory: FC<InventoryProps> = ({ items }) => {
   return (
     <InventoryContainer>
-    <Grid $columns={4} $sizes="75px 75px 75px 75px">
-      {Array.from({ length: INVENTORY_SIZE }, () => undefined).map((_, i) => <div key={i}>
-        {items[i] !== undefined && <Image src={items[i].image} width="50" height="50" alt={items[i].name} />}
-      </div>)}
-    </Grid>
+      <Grid $columns={4} $sizes="75px 75px 75px 75px">
+        {Array.from({ length: INVENTORY_SIZE }, () => undefined).map((_, i) => <div key={i}>
+          {items[i] !== undefined && <Image src={items[i].image} width="50" height="50" alt={items[i].name} />}
+        </div>)}
+      </Grid>
     </InventoryContainer>
   )
 }

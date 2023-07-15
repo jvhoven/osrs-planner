@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, ReactNode, KeyboardEvent, MouseEvent, useEffect } from "react";
+import { useState, ChangeEvent, ReactNode, KeyboardEvent, MouseEvent, useEffect, useMemo } from "react";
 import Input from "./input";
 import { styled } from "styled-components";
 
@@ -35,6 +35,7 @@ const AutocompleteListContainer = styled.div`
 
 export default function AutoComplete<T>(
   { suggestions, onSelect, searchOn }: { suggestions: T[], searchOn: keyof T & string, onSelect: (item: T) => void }) {
+  const memoOnSelect = useMemo(() => onSelect, [])
   const [state, setState] = useState<{ activeSuggestion: number, filteredSuggestions: T[], showSuggestions: boolean, selected?: T, userInput: string }>({
     activeSuggestion: 0,
     filteredSuggestions: [],
@@ -42,6 +43,7 @@ export default function AutoComplete<T>(
     selected: undefined,
     userInput: ''
   });
+
 
   function onChange(e: ChangeEvent<{ value: string }>) {
     const userInput = e.currentTarget.value;
@@ -93,9 +95,9 @@ export default function AutoComplete<T>(
 
   useEffect(() => {
     if (state.selected !== undefined) {
-      onSelect(state.selected);
+      memoOnSelect(state.selected);
     }
-  }, [state.selected, onSelect])
+  }, [state.selected, memoOnSelect])
 
   let suggestionsListComponent: ReactNode;
 
