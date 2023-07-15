@@ -77,6 +77,11 @@ const ArmourSetupContainer = styled.div`
     align-self: center;
     justify-self: center;
   }
+
+  .weapon {
+grid-column: col 1 / span 1;
+  grid-row: row 4;
+    }
 `
 
 type EquippableSlots = Exclude<typeof ITEM_SLOT[number], "two-handed">;
@@ -127,6 +132,17 @@ export default function Page({ params }: { params: { character: string } }) {
     inventory: []
   });
 
+  const onSelect = (item: Item) => {
+    if (Object.keys(loadout?.equipped ?? {}).includes(item.slot)) {
+      console.log("Already got item in that slot, send to inventory!")
+      setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
+    } else {
+      console.log("Do not have slot equipped, equip it!")
+      setLoadout({ ...loadout, equipped: { ...loadout.equipped, [`${item.slot}`]: item } })
+      console.log(loadout.equipped);
+    }
+  }
+
   return (
     <Character rsn={params.character}>
       {({ gamemode, rsn }) =>
@@ -135,15 +151,7 @@ export default function Page({ params }: { params: { character: string } }) {
           <Autocomplete<Item>
             suggestions={allItems}
             searchOn="name"
-            onSelect={(item: Item) => {
-              if (Object.keys(loadout?.equipped ?? {}).includes(item.slot)) {
-                console.log("Already got item in that slot, send to inventory!")
-                setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
-              } else {
-                console.log("Do not have slot equipped, equip it!")
-                setLoadout({ ...loadout, equipped: { ...loadout.equipped, [`${item.slot}`]: item } })
-              }
-            }}
+            onSelect={onSelect}
           />
           <div className="wrapper">
             <ArmourSetup equipped={loadout.equipped} />
