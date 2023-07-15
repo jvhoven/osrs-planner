@@ -1,4 +1,4 @@
-import { ACTIVITIES, BH_MODES, BOSSES, CLUES, SKILLS, GAMEMODES } from "./constants";
+import { ACTIVITIES, BH_MODES, BOSSES, CLUES, SKILLS, GAMEMODES, ITEM_SLOT } from "./constants";
 
 export type Gamemode = typeof GAMEMODES[number];
 export type SkillName = typeof SKILLS[number];
@@ -15,6 +15,41 @@ export type Character = {
   gamemode: Gamemode;
   rsn: string;
   stats: Stats;
+}
+
+type Bonuses = {
+    attack: {
+      stab: number,
+      slash: number,
+      crush: number,
+      magic: number,
+      ranged: number
+    },
+    defence: {
+      stab: number,
+      slash: number,
+      crush: number,
+      magic: number,
+      ranged: number
+    },
+    other: {
+      strength: number,
+      rangedStrength: number,
+      magicDamagePercentage: number,
+      prayer: number
+    }
+}
+
+export type Item = {
+  name: string;
+  image: string;
+  slot: typeof ITEM_SLOT[number];
+  bonuses: Bonuses;
+  weight: number;
+  attackSpeed?: number;
+  members: boolean;
+  poisonable: boolean;
+  flammable: boolean;
 }
 
 export interface Skill {

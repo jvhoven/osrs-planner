@@ -6,6 +6,29 @@ import {
   Gamemode
 } from './types';
 
+export const ITEM_SLOT = [
+  'ammunition',
+  'body',
+  'cape',
+  'feet',
+  'gloves',
+  'head',
+  'neck',
+  'legs',
+  'ring',
+  'shield',
+  'two-handed',
+  'weapon'
+] as const;
+
+export const ATTACK_STYLES = [
+  'stab',
+  'slash',
+  'crush',
+  'magic',
+  'ranged'
+] as const;
+
 export const SKILLS = [
   'overall',
   'attack',

@@ -93,7 +93,7 @@ export default function CharacterLayout({ children, params: { character } }: { c
             </li>
             <li>
               <Button>
-                <Link href={`/characters/${character}/goals`}>Items</Link>
+                <Link href={`/characters/${character}/items`}>Items</Link>
               </Button>
             </li>
             <li>

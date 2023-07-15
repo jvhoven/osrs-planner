@@ -2,6 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+  remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'oldschool.runescape.wiki',
+        port: '',
+        pathname: '/images/**'
+      }
+    ]
+  },
   async rewrites() {
     return [
       {

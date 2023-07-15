@@ -1,6 +1,6 @@
 "use client"
 
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Wrapper = styled.section`
   width: 100%;
@@ -8,7 +8,7 @@ export const Wrapper = styled.section`
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   flex-direction: column;
 
   @media only screen and (max-width: 600px) {
