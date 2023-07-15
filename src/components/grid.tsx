@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Grid = styled.section<{ $columns: number }>`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33.33%, 1fr));
+export const Grid = styled.section<{ $columns: number, $sizes?: string}>`
+  --columnDefinition: ${props => props.$sizes ? props.$sizes : `repeat(auto-fit, minmax(calc(100% / ${props.$columns}), 1fr))`};
 
-  width: calc(100% - ${props => props.$columns} * 1fr);
+  display: grid;
+  grid-template-columns: var(--columnDefinition);
   gap: 1rem 1rem;
 
 
