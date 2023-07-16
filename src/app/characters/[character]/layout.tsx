@@ -71,7 +71,7 @@ const CharacterLayoutContainer = styled.div`
   width: 100%;
 
   ${AccountNameContainer} {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 `
 

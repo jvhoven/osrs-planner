@@ -40,18 +40,6 @@ type Bonuses = {
     }
 }
 
-export type Item = {
-  name: string;
-  image: string;
-  slot: typeof ITEM_SLOT[number];
-  bonuses: Bonuses;
-  weight: number;
-  attackSpeed?: number;
-  members: boolean;
-  poisonable: boolean;
-  flammable: boolean;
-}
-
 export interface Skill {
   rank: number;
   level: number;

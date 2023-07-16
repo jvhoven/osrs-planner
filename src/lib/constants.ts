@@ -1,3 +1,4 @@
+import { Item } from './item';
 import {
   BHType,
   Boss,
@@ -6,20 +7,20 @@ import {
   Gamemode
 } from './types';
 
-export const ITEM_SLOT = [
-  'ammunition',
+export const ITEM_SLOT: Item["equipment"]["slot"][] = [
+  'ammo',
   'body',
   'cape',
   'feet',
-  'gloves',
+  'hands',
   'head',
   'neck',
   'legs',
   'ring',
   'shield',
-  'two-handed',
+  '2h',
   'weapon'
-] as const;
+];
 
 export const ATTACK_STYLES = [
   'stab',
