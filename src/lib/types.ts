@@ -21,7 +21,7 @@ export type Character = {
   stats: Stats;
 }
 
-type Bonuses = {
+export type Bonuses = {
     attack: {
       stab: number,
       slash: number,
@@ -41,6 +41,7 @@ type Bonuses = {
       rangedStrength: number,
       magicDamagePercentage: number,
       prayer: number
+      weight: number
     }
 }
 

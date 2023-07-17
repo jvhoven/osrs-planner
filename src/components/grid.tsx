@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Grid = styled.section<{ $columns: number, $sizes?: string}>`
+export const Grid = styled.section<{ $columns: number, $sizes?: string }>`
   --columnDefinition: ${props => props.$sizes ? props.$sizes : `repeat(auto-fit, minmax(calc(100% / ${props.$columns}), 1fr))`};
 
   display: grid;
