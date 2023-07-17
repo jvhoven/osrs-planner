@@ -37,12 +37,13 @@ const ProfileListItemContainer = styled.li`
 `
 
 export const CharacterListItem: FunctionComponent<Character> = ({
+  id,
   rsn,
   gamemode,
   stats,
 }) => {
   return (
-    <Link href={`/characters/${rsn}`}>
+    <Link href={`/characters/${id}`}>
       <ProfileListItemContainer>
         <AccountName rsn={rsn} gamemode={gamemode} />
         xp {new Intl.NumberFormat('en-GB').format(stats.skills.overall.xp)}

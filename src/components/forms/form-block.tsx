@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-export const FormBlock = styled.div`
+export default styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 72px;
 
   span {
     line-height: 20px;

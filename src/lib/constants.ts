@@ -1,3 +1,4 @@
+import { Item } from './item';
 import {
   BHType,
   Boss,
@@ -5,6 +6,29 @@ import {
   SkillName,
   Gamemode
 } from './types';
+
+export const ITEM_SLOT: Item["equipment"]["slot"][] = [
+  'ammo',
+  'body',
+  'cape',
+  'feet',
+  'hands',
+  'head',
+  'neck',
+  'legs',
+  'ring',
+  'shield',
+  '2h',
+  'weapon'
+];
+
+export const ATTACK_STYLES = [
+  'stab',
+  'slash',
+  'crush',
+  'magic',
+  'ranged'
+] as const;
 
 export const SKILLS = [
   'overall',
@@ -154,7 +178,7 @@ export const FORMATTED_BOSS_NAMES: FormattedBossNames = {
   abyssalSire: 'Abyssal Sire',
   alchemicalHydra: 'Alchemical Hydra',
   artio: 'Artio',
-  barrows: 'Barrows Chests',
+  barrows: 'Barrows',
   bryophyta: 'Bryophyta',
   callisto: 'Callisto',
   calvarion: "Calvar'ion",

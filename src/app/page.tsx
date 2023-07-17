@@ -28,7 +28,7 @@ export default function Page() {
       <h4>Making the forgettable unforgettable</h4>
       <Image className="banner" src='/create-character.svg' alt='' width='500' height='500' />
       <Button>
-        <Link href='/characters/'>Get started</Link>
+        <Link href='/indexer/'>Get started</Link>
       </Button>
     </MainPageContainer>
   )

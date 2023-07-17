@@ -1,5 +1,5 @@
-import { Component, ReactNode, Suspense } from 'react'
-import { styled } from 'styled-components'
+import { Component, ReactNode } from 'react'
+import styled from 'styled-components'
 import Image from 'next/image'
 
 import { Wrapper } from './wrapper'

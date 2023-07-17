@@ -2,21 +2,22 @@ import Dexie, { Table } from "dexie";
 
 import { populate } from "./populate";
 import { Character } from "@/lib/types";
+import { Item } from "@/lib/item";
 
 class Database extends Dexie {
   public characters!: Table<Character, number>;
-  
+  public items!: Table<Item, number>;
+
   constructor() {
     super("osrs-planner");
-    this.version(2).stores({
-      characters: "&rsn,gamemode,stats"
+    this.version(4).stores({
+      characters: "++id,rsn,gamemode,stats",
+      items: "&id,name"
     });
   }
 }
 
 export const db = new Database();
-
-db.on('populate', populate);
 
 export function resetDatabase() {
   return db.transaction('rw', db.characters, async () => {

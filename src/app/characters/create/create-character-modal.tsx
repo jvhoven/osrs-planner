@@ -4,8 +4,7 @@ import { useCharacter } from "../hooks/useCharacter"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { db } from "@/models/db"
 import { Modal } from "@/components/modal"
-import { FormBlock } from "@/components/forms/form-block"
-import { Form } from "@/components/forms/form"
+import { FormBlock, Form, Input, Select } from "@/components/forms"
 import { FORMATTED_GAMEMODE_NAMES, GAMEMODES } from "@/lib/constants"
 import { Button } from "@/components/button"
 import { useRouter } from "next/navigation"
@@ -46,16 +45,17 @@ export const CreateCharacterModal: FunctionComponent<CreateCharacterModalProps> 
   }
 
   useEffect(() => {
+    console.log("Why does this run twice?")
     if (stats && formState.rsn && formState.gamemode && mode === 'import') {
       db.characters.add({
         stats,
         rsn: formState.rsn,
         gamemode: formState.gamemode,
-      }).then(() => {
-        router.push(`/characters/${formState.rsn}`);
+      }).then((id) => {
+        router.push(`/characters/${id}`);
       });
     }
-  }, [stats?.skills.overall.level, formState.rsn, formState.gamemode, mode, router, stats])
+  }, [stats?.skills.overall.level, formState.rsn, formState.gamemode])
 
   return (
     <Modal id={id} title={title}>
@@ -64,18 +64,18 @@ export const CreateCharacterModal: FunctionComponent<CreateCharacterModalProps> 
           <label htmlFor='rsn'>
             {mode === 'import' ? 'RSN' : 'Character name'}
           </label>
-          <input type='text' {...register('rsn', { required: true })} />
+          <Input type='text' {...register('rsn', { required: true })} />
           {errors.rsn && <span>This field is required</span>}
         </FormBlock>
         <FormBlock>
           <label htmlFor='gamemode'>Gamemode</label>
-          <select {...register('gamemode')}>
+          <Select {...register('gamemode')}>
             {GAMEMODES.map((gamemode) => (
               <option key={gamemode} value={gamemode}>
                 {FORMATTED_GAMEMODE_NAMES[gamemode]}
               </option>
             ))}
-          </select>
+          </Select>
           {errors.gamemode && <span>This field is required</span>}
         </FormBlock>
         <Button type='submit'>

@@ -1,5 +1,8 @@
 import { ACTIVITIES, BH_MODES, BOSSES, CLUES, SKILLS, GAMEMODES } from "./constants";
+import { Item } from "./item";
 
+
+export type EquippableSlots = Exclude<Required<Item["equipment"]>["slot"], "2h">;
 export type Gamemode = typeof GAMEMODES[number];
 export type SkillName = typeof SKILLS[number];
 export type Skills = { [Name in SkillName]: Skill };
@@ -12,9 +15,34 @@ export type Bosses = { [Type in Boss]: Activity };
 export type ActivityName = typeof ACTIVITIES[number];
 
 export type Character = {
+  id?: number;
   gamemode: Gamemode;
   rsn: string;
   stats: Stats;
+}
+
+export type Bonuses = {
+    attack: {
+      stab: number,
+      slash: number,
+      crush: number,
+      magic: number,
+      ranged: number
+    },
+    defence: {
+      stab: number,
+      slash: number,
+      crush: number,
+      magic: number,
+      ranged: number
+    },
+    other: {
+      strength: number,
+      rangedStrength: number,
+      magicDamagePercentage: number,
+      prayer: number
+      weight: number
+    }
 }
 
 export interface Skill {

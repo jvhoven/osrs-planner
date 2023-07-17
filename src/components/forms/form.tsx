@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import FormBlock from "./form-block";
 
-export const Form = styled.form`
+export default styled.form<{ $inline?: boolean }>`
   flex: 0 42.5%;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => props.$inline ? "row" : "column"};
   justify-content: space-between;
-  height: 100%;
 
   input[type='text'],
   select {

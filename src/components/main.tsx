@@ -7,7 +7,7 @@ export const Main = styled.section`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 4rem;
+  padding: 1rem 4rem;
   min-height: 100vh;
 
   @media only screen and (max-width: 600px) {
