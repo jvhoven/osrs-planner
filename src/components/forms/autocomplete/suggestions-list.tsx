@@ -30,13 +30,13 @@ export const SuggestionsListContainer = styled.ul`
 
 interface SuggestionListProps<T> {
   suggestions: T[];
-  indexFor: (item: T) => string;
+  labelFor: (item: T) => string;
   keyFor: (item: T) => string;
   activeSuggestion: number;
   onClick: (item: T) => void;
 }
 
-const SuggestionList = <T,>({ suggestions, keyFor, indexFor, activeSuggestion, onClick }: SuggestionListProps<T>) => {
+const SuggestionList = <T,>({ suggestions, labelFor, keyFor, activeSuggestion, onClick }: SuggestionListProps<T>) => {
   const selectRef = useRef<HTMLUListElement>(null);
 
   function keepInView() {
@@ -67,7 +67,7 @@ const SuggestionList = <T,>({ suggestions, keyFor, indexFor, activeSuggestion, o
 
         return (
           <li className={className} key={keyFor(suggestion)} onClick={() => onClick(suggestion)}>
-            {indexFor(suggestion)}
+            {labelFor(suggestion)}
           </li>
         );
       })}

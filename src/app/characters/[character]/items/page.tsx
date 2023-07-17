@@ -3,14 +3,15 @@
 import { AccountName } from "@/components/account-name"
 import { Character } from "../../components/character"
 import { ITEM_SLOT } from "@/lib/constants"
-import useSWR from "swr/immutable";
 
 import React, { FC, useState } from "react"
-import { AutoComplete } from "@/components/forms"
 import Image from "next/image"
 import { Grid } from "@/components/grid"
 import { ArmourSetupContainer, InventoryContainer, InventoryPageContainer } from "./styled"
 import { Item } from "@/lib/item";
+import dynamic from "next/dynamic"
+
+const ItemFinder = dynamic(() => import('@/components/item-finder'), { ssr: false });
 
 type EquippableSlots = Exclude<Required<Item["equipment"]>["slot"], "2h">;
 type ArmourSetupProps = {
@@ -25,7 +26,7 @@ const INVENTORY_SIZE = 28;
 const Inventory: FC<InventoryProps> = ({ items }) => {
   return (
     <InventoryContainer>
-      <Grid $columns={4} $sizes="75px 75px 75px 75px">
+      <Grid $columns={4} $sizes="55px 55px 55px 55px">
         {Array.from({ length: INVENTORY_SIZE }, () => undefined).map((_, i) => <div key={i}>
           {items[i] !== undefined && <Image src={`data:image/jpeg;base64,${items[i].icon}`} unoptimized width="50" height="50" alt={items[i].name} />}
         </div>)}
@@ -34,34 +35,97 @@ const Inventory: FC<InventoryProps> = ({ items }) => {
   )
 }
 
+function calculateStats(equipped: ArmourSetupProps["equipped"]) {
+  return Object.entries(equipped).reduce((prev, [, item]) => {
+    if (item === undefined || item.equipment === null) {
+      return prev;
+    } else {
+      return {
+        ...prev,
+        attack: {
+          stab: prev.attack.stab + item.equipment.attack_stab!,
+          slash: prev.attack.slash + item.equipment.attack_slash!,
+          crush: prev.attack.crush + item.equipment.attack_crush!,
+          magic: prev.attack.magic + item.equipment.attack_magic!,
+          range: prev.attack.range + item.equipment.attack_ranged!
+        },
+        defence: {
+          stab: prev.defence.stab + item.equipment.defence_stab!,
+          slash: prev.defence.slash + item.equipment.defence_slash!,
+          crush: prev.defence.crush + item.equipment.defence_crush!,
+          magic: prev.defence.magic + item.equipment.defence_magic!,
+          range: prev.defence.range + item.equipment.defence_ranged!
+        },
+        other: {
+          strength: prev.other.strength + item.equipment.melee_strength!,
+          rangedStrength: prev.other.rangedStrength + item.equipment.ranged_strength!,
+          prayer: prev.other.prayer + item.equipment.prayer!,
+          magicDamage: prev.other.magicDamage + item.equipment.magic_damage!,
+          weight: prev.other.weight + item.weight
+        }
+      }
+    }
+  }, {
+    attack: {
+      stab: 0,
+      slash: 0,
+      crush: 0,
+      magic: 0,
+      range: 0
+    },
+    defence: {
+      stab: 0,
+      slash: 0,
+      crush: 0,
+      magic: 0,
+      range: 0
+    },
+    other: {
+      strength: 0,
+      rangedStrength: 0,
+      prayer: 0,
+      magicDamage: 0,
+      weight: 0
+    }
+  }
+  )
+}
+
 const ArmourSetup: FC<ArmourSetupProps> = ({ equipped }) => {
+  const stats = calculateStats(equipped);
+
   return (
     <ArmourSetupContainer>
-      {(ITEM_SLOT.filter(slot => slot !== "2h") as EquippableSlots[]).map(slot =>
-        <div
-          key={slot}
-          className={slot}
-          style={{ gridArea: slot }}
-        >
-          {equipped[slot] !== undefined && <Image src={`data:image/jpeg;base64,${equipped[slot]!.icon}`} unoptimized width="50" height="50" alt={equipped[slot]!.name} />}
-        </div>
-      )}
+      <div className="items">
+        {(ITEM_SLOT.filter(slot => slot !== "2h") as EquippableSlots[]).map(slot =>
+          <div
+            key={slot}
+            className={slot}
+            style={{ gridArea: slot }}
+          >
+            {equipped[slot] !== undefined && <Image src={`data:image/jpeg;base64,${equipped[slot]!.icon}`} unoptimized width="50" height="50" alt={equipped[slot]!.name} />}
+          </div>
+        )}
+      </div>
+      <div className="stats">
+        {Object.entries(stats).map(([category, statsPerCategory]) => (
+          <div key={category}>
+            <h4>{category}</h4>
+            <ul>
+              {Object.entries(statsPerCategory).map(([label, bonus]) => (
+                <li key={`${category}-${label}`}>{label}: {bonus}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
     </ArmourSetupContainer>
+
   );
 }
 
-const fetcher = async (url: string) => {
-  const res = await fetch(url)
-  const data = await res.json();
-
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-  return data;
-}
-
 export default function Page({ params }: { params: { character: string } }) {
-  const { data } = useSWR<Item[], { message: string }>("/api/items", fetcher);
   const [loadout, setLoadout] = useState<{
     equipped: ArmourSetupProps["equipped"]
     inventory: InventoryProps["items"]
@@ -82,14 +146,15 @@ export default function Page({ params }: { params: { character: string } }) {
     inventory: []
   });
 
-  const onSelect = (item: Pick<Item, "name" | "id">) => {
-    // TODO: fetch more data information through another endpoint 
-    console.log(item);
-
-    // const dedicatedItemSlot: EquippableSlots = item.equipment!.slot === "2h" ? "weapon" : item.equipment!.slot!;
-    // shouldSendToInventory(item, dedicatedItemSlot, loadout.equipped)
-    //   ? setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
-    //   : setLoadout({ ...loadout, equipped: { ...loadout.equipped, [`${dedicatedItemSlot}`]: item } })
+  const onSelect = async (item: Item) => {
+    if (item.equipment === null) {
+      setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
+    } else {
+      const dedicatedItemSlot: EquippableSlots = item.equipment!.slot === "2h" ? "weapon" : item.equipment!.slot!;
+      shouldSendToInventory(item, dedicatedItemSlot, loadout.equipped)
+        ? setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
+        : setLoadout({ ...loadout, equipped: { ...loadout.equipped, [`${dedicatedItemSlot}`]: item } })
+    }
   }
 
   return (
@@ -97,12 +162,7 @@ export default function Page({ params }: { params: { character: string } }) {
       {({ gamemode, rsn }) =>
         <InventoryPageContainer>
           <AccountName rsn={rsn} gamemode={gamemode} />
-          <AutoComplete<Pick<Item, "name" | "id">>
-            suggestions={data ?? []}
-            keyFor={(item) => `${item.id}`}
-            indexFor={(item) => item.name}
-            onSelect={onSelect}
-          />
+          <ItemFinder onSelect={onSelect} />
           <div className="wrapper">
             <ArmourSetup equipped={loadout.equipped} />
             <Inventory items={loadout.inventory} />

@@ -27,19 +27,19 @@ const initialState = {
 }
 
 interface AutoCompleteProps<T> {
-  keyFor: (item: T) => string;
   suggestions: T[];
-  indexFor: (item: T) => string;
+  labelFor: (item: T) => string;
+  keyFor: (item: T) => string;
   onSelect: (item: T) => void;
 }
 
-const AutoComplete = <T,>({ suggestions, onSelect, keyFor, indexFor }: AutoCompleteProps<T>) => {
+const AutoComplete = <T,>({ suggestions, onSelect, labelFor, keyFor }: AutoCompleteProps<T>) => {
   const [state, setState] = useState<AutoCompleteState<T>>(initialState);
 
   function onChange(e: ChangeEvent<HTMLInputElement>) {
     const userInput = e.currentTarget.value;
     const filteredSuggestions = suggestions.filter(
-      suggestion => indexFor(suggestion).toLowerCase().indexOf(userInput.toLowerCase()) > -1
+      suggestion => labelFor(suggestion).toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
 
     setState({
@@ -58,7 +58,7 @@ const AutoComplete = <T,>({ suggestions, onSelect, keyFor, indexFor }: AutoCompl
         activeSuggestion: 0,
         showSuggestions: false,
         filteredSuggestions: [],
-        userInput: indexFor(filteredSuggestions[activeSuggestion]),
+        userInput: labelFor(filteredSuggestions[activeSuggestion]),
         selected: filteredSuggestions[activeSuggestion]
       })
     } else if (e.key === 'ArrowUp') {
@@ -81,7 +81,7 @@ const AutoComplete = <T,>({ suggestions, onSelect, keyFor, indexFor }: AutoCompl
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: indexFor(suggestion),
+      userInput: labelFor(suggestion),
       selected: suggestion
     })
   }
@@ -98,9 +98,9 @@ const AutoComplete = <T,>({ suggestions, onSelect, keyFor, indexFor }: AutoCompl
       <Input autoComplete="off" placeholder="Search for item, e.g. Tumeken's Shadow" onChange={onChange} onKeyDown={onKeyDown} value={state.userInput} />
       {state.userInput && state.showSuggestions && (
         <SuggestionList
-          keyFor={keyFor}
           suggestions={state.filteredSuggestions}
-          indexFor={indexFor}
+          labelFor={labelFor}
+          keyFor={keyFor}
           activeSuggestion={state.activeSuggestion}
           onClick={(e) => onClickSuggestion(e)}
         />

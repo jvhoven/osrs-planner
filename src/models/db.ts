@@ -1,24 +1,23 @@
 import Dexie, { Table } from "dexie";
 
 import { populate } from "./populate";
-import { Character, Item } from "@/lib/types";
+import { Character } from "@/lib/types";
+import { Item } from "@/lib/item";
 
 class Database extends Dexie {
   public characters!: Table<Character, number>;
   public items!: Table<Item, number>;
-  
+
   constructor() {
     super("osrs-planner");
-    this.version(2).stores({
+    this.version(3).stores({
       characters: "&rsn,gamemode,stats",
-      items: "++id,name,slot,bonuses,weight,attackSpeed,membersOnly,canBePoisoned"
+      items: "&id,name"
     });
   }
 }
 
 export const db = new Database();
-
-db.on('populate', populate);
 
 export function resetDatabase() {
   return db.transaction('rw', db.characters, async () => {

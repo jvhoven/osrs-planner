@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-  remotePatterns: [
+    remotePatterns: [
       {
         protocol: 'https',
         hostname: 'oldschool.runescape.wiki',

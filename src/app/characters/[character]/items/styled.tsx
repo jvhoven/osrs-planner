@@ -11,65 +11,88 @@ export const InventoryPageContainer = styled.div`
 `
 
 export const InventoryContainer = styled.div`
-  flex: 0.5;
+  align-self: flex-end;
 
   ${Grid} {
-     div {
+    div {
       display: flex;
       justify-content: center;
       align-items: center;
 
-        ${Hoverable}
-        width: 100%;
-        height: 75px;
-        border: 1px solid white;
-        border-radius: 6px;
+      ${Hoverable}
+      width: 100%;
+      height: 55px;
+      border: 1px solid white;
+      border-radius: 6px;
 
-        img {
-          width: auto;
-            height: 50px;
-          }
+      img {
+        width: auto;
+        height: 35px;
       }
+    }
   }
 `
 
 export const ArmourSetupContainer = styled.div`
-  width: 250px;
-  display: grid;
-  grid-template-areas:
-    'head head head'
-    'cape neck ammo'
-    'weapon body shield'
-    'legs legs legs'
-    'hands feet ring';
+  display: flex;
+  justify-content: space-between;
+  flex: 0.8;
 
-  gap: 1rem;
+  .items {
+    width: 250px;
+    display: grid;
+    grid-template-areas:
+      'head head head'
+      'cape neck ammo'
+      'weapon body shield'
+      'legs legs legs'
+      'hands feet ring';
 
-  > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 1rem;
+
+    > div {
       ${Hoverable}
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 75px;
       height: 75px;
       border: 1px solid white;
       border-radius: 6px;
 
       img {
-          object-fit: contain;
-          width: auto;
-          height: 50px;
-          margin-left: 7px;
-        }
+        object-fit: contain;
+        width: auto;
+        height: 50px;
+        margin-left: 7px;
+      }
     }
 
-  .head, .legs {
-    align-self: center;
-    justify-self: center;
+    .head, .legs {
+      align-self: center;
+      justify-self: center;
+    }
+
+    .weapon {
+  grid-column: col 1 / span 1;
+    grid-row: row 4;
+      }
   }
 
-  .weapon {
-grid-column: col 1 / span 1;
-  grid-row: row 4;
+  .stats {
+      margin: 0;
+
+      h4 {
+        margin: 0.6rem 0;
+          &:first-letter {
+              text-transform: uppercase;
+            }
+        }
+
+      li {
+          list-style: none;
+          font-size: 14px;
+        }
     }
 `
