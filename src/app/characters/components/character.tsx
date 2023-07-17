@@ -11,13 +11,13 @@ import { Character as CharacterType } from "@/lib/types";
 
 type Props = {
   children: (character: CharacterType) => ReactNode;
-  rsn: string;
+  id: number;
 }
 
-export const Character: FunctionComponent<Props> = ({ rsn, children }) => {
+export const Character: FunctionComponent<Props> = ({ id, children }) => {
   const character = useLiveQuery(
-    () => db.characters.get({ rsn }),
-    [rsn],
+    () => db.characters.get(Number(id)),
+    [id],
   );
 
   if (character === undefined) {

@@ -2,18 +2,13 @@
 
 import { AccountName } from '@/components/account-name'
 import { Character } from '../components/character'
-import { useEffect } from 'react';
 
-export default function Page({ params }: { params: { character: string } }) {
+export default function Page({ params }: { params: { character: number } }) {
   return (
-    <>
-    <Character rsn={params.character}>
-      {({ gamemode, rsn }) => 
-        <>
+      <Character id={params.character}>
+        {({ gamemode, rsn }) => 
           <AccountName rsn={rsn} gamemode={gamemode} />
-        </>
-      }
-    </Character>
-    </>
+        }
+      </Character>
   )
 }

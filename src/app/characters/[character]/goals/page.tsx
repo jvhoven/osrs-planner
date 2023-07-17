@@ -3,9 +3,9 @@
 import { AccountName } from "@/components/account-name"
 import { Character } from "../../components/character"
 
-export default function Page({ params }: { params: { character: string } }) {
+export default function Page({ params }: { params: { character: number } }) {
   return (
-    <Character rsn={params.character}>
+    <Character id={params.character}>
       {({ gamemode, rsn }) =>
         <>
           <AccountName rsn={rsn} gamemode={gamemode} />

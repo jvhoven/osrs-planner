@@ -15,6 +15,7 @@ export type Bosses = { [Type in Boss]: Activity };
 export type ActivityName = typeof ACTIVITIES[number];
 
 export type Character = {
+  id?: number;
   gamemode: Gamemode;
   rsn: string;
   stats: Stats;

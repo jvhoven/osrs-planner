@@ -22,9 +22,9 @@ const StyledActivitiesPage = styled.div`
   }
 `
 
-export default function Page({ params }: { params: { character: string } }) {
+export default function Page({ params }: { params: { character: number } }) {
   return (
-    <Character rsn={params.character}>
+    <Character id={params.character}>
       {({ gamemode, rsn, stats: { bosses } }) =>
         <StyledActivitiesPage>
           <AccountName rsn={rsn} gamemode={gamemode} />

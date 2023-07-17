@@ -4,9 +4,9 @@ import { AccountName } from "@/components/account-name";
 import { SkillsOverview } from "@/components/skills/overview";
 import { Character } from "../../components/character";
 
-export default function Page({ params }: { params: { character: string } }) {
+export default function Page({ params }: { params: { character: number } }) {
   return (
-    <Character rsn={params.character}>
+    <Character id={params.character}>
       {({ gamemode, rsn, stats }) =>
         <>
           <AccountName rsn={rsn} gamemode={gamemode} />

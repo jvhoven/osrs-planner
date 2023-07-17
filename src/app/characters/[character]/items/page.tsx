@@ -12,7 +12,7 @@ import { InventoryPageContainer } from "./styled"
 
 const ItemFinder = dynamic(() => import('@/components/item-finder'), { ssr: false });
 
-export default function Page({ params }: { params: { character: string } }) {
+export default function Page({ params }: { params: { character: number } }) {
   const [loadout, setLoadout] = useState<{
     equipped: GearProps["equipped"]
     inventory: InventoryProps["items"]
@@ -45,7 +45,7 @@ export default function Page({ params }: { params: { character: string } }) {
   }
 
   return (
-    <Character rsn={params.character}>
+    <Character id={params.character}>
       {({ gamemode, rsn }) =>
         <InventoryPageContainer>
           <AccountName rsn={rsn} gamemode={gamemode} />

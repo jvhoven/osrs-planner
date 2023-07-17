@@ -10,8 +10,8 @@ class Database extends Dexie {
 
   constructor() {
     super("osrs-planner");
-    this.version(3).stores({
-      characters: "&rsn,gamemode,stats",
+    this.version(4).stores({
+      characters: "++id,rsn,gamemode,stats",
       items: "&id,name"
     });
   }
