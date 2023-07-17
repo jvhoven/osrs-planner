@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "yarn json2ts ./src/schemas/item.jsonschema.json > ./src/lib/item.ts --unreachableDefinitions"
+    "prepare": "json2ts ./src/schemas/item.jsonschema.json > ./src/lib/item.ts --unreachableDefinitions"
   },
   "packageManager": "yarn@3.6.0",
   "dependencies": {
