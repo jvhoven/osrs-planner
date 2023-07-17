@@ -2,45 +2,27 @@
 
 import { AccountName } from "@/components/account-name"
 import { Character } from "../../components/character"
-import { Gear, GearProps } from "@/components/inventory/gear"
-import { Inventory, InventoryProps } from "@/components/inventory/inventory"
 import { Item } from "@/lib/item"
-import { EquippableSlots } from "@/lib/types"
 import dynamic from "next/dynamic"
-import React, { useState } from "react"
+import React from "react"
 import { InventoryPageContainer } from "./styled"
+import { Inventory } from "@/components/inventory/inventory"
+import { useLiveQuery } from "dexie-react-hooks"
+import { db } from "@/models/db"
 
 const ItemFinder = dynamic(() => import('@/components/item-finder'), { ssr: false });
 
 export default function Page({ params }: { params: { character: number } }) {
-  const [loadout, setLoadout] = useState<{
-    equipped: GearProps["equipped"]
-    inventory: InventoryProps["items"]
-  }>({
-    equipped: {
-      ammo: undefined,
-      body: undefined,
-      cape: undefined,
-      feet: undefined,
-      hands: undefined,
-      head: undefined,
-      legs: undefined,
-      neck: undefined,
-      ring: undefined,
-      shield: undefined,
-      weapon: undefined
-    },
-    inventory: []
-  });
+  const inventory = useLiveQuery(
+    () => db.inventories.get({ character_id: Number(params.character) }),
+    [params.character]
+  );
 
-  const onSelect = async (item: Item) => {
-    if (item.equipment === null) {
-      setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
-    } else {
-      const dedicatedItemSlot: EquippableSlots = item.equipment!.slot === "2h" ? "weapon" : item.equipment!.slot!;
-      shouldSendToInventory(item, dedicatedItemSlot, loadout.equipped)
-        ? setLoadout({ ...loadout, inventory: [...loadout.inventory, item] })
-        : setLoadout({ ...loadout, equipped: { ...loadout.equipped, [`${dedicatedItemSlot}`]: item } })
+  const onSelect = (item: Item) => {
+    if (inventory !== undefined) {
+      db.inventories.update(inventory.id!, {
+        items: [...inventory.items, item]
+      })
     }
   }
 
@@ -49,30 +31,29 @@ export default function Page({ params }: { params: { character: number } }) {
       {({ gamemode, rsn }) =>
         <InventoryPageContainer>
           <AccountName rsn={rsn} gamemode={gamemode} />
-          <ItemFinder onSelect={onSelect} />
+          <ItemFinder
+            onSelect={onSelect}
+            query={() => db.items
+              .where('id')
+              // @ts-expect-error
+              .noneOf(...(inventory?.items ?? []).map(item => item.id))
+              .and(item => item.equipable_by_player)
+              .toArray()
+            }
+          />
           <div className="wrapper">
-            <Gear equipped={loadout.equipped} />
-            <Inventory items={loadout.inventory} />
+            <Inventory
+              size={120}
+              items={inventory?.items ?? []}
+              columns={{
+                count: 12,
+                size: "55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px"
+              }}
+            />
           </div>
         </InventoryPageContainer>
       }
     </Character>
   )
-}
-
-function shouldSendToInventory(item: Item, slot: EquippableSlots, equippedItems: GearProps["equipped"]) {
-  if (item.equipment.slot === "shield" && hasTwoHandedWeaponEquipped(equippedItems.weapon)) {
-    return true;
-  }
-
-  return alreadyHasItemInSlot(slot, equippedItems);
-}
-
-function hasTwoHandedWeaponEquipped(item: Item | undefined) {
-  return item !== undefined && item.equipment.slot === "2h";
-}
-
-function alreadyHasItemInSlot(slot: EquippableSlots, equippedItems: GearProps["equipped"]) {
-  return equippedItems[slot] !== undefined
 }
 
