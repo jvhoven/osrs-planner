@@ -10,8 +10,6 @@ export default function ItemFinder({ onSelect }: {
     () => db.items.toArray(), [], []
   );
 
-  console.log(items);
-
   return (<AutoComplete
     suggestions={items}
     labelFor={(item) => item.name}

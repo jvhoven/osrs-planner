@@ -1,5 +1,8 @@
-import { ACTIVITIES, BH_MODES, BOSSES, CLUES, SKILLS, GAMEMODES, ITEM_SLOT } from "./constants";
+import { ACTIVITIES, BH_MODES, BOSSES, CLUES, SKILLS, GAMEMODES } from "./constants";
+import { Item } from "./item";
 
+
+export type EquippableSlots = Exclude<Required<Item["equipment"]>["slot"], "2h">;
 export type Gamemode = typeof GAMEMODES[number];
 export type SkillName = typeof SKILLS[number];
 export type Skills = { [Name in SkillName]: Skill };

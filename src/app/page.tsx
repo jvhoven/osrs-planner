@@ -5,6 +5,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
+function handler (event: any) {
+  event.preventDefault(); // Prevents default handler (would log to console).
+  let reason = event.reason;
+  console.warn('Unhandled promise rejection:', (reason && (reason.stack || reason)));
+};
+
+window.addEventListener ('unhandledrejection', handler);
+
 const MainPageContainer = styled.section`
   display: flex;
   flex-direction: column;

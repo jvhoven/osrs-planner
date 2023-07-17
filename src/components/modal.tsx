@@ -18,11 +18,13 @@ const Dialog = styled.dialog`
   margin: auto auto;
   padding: 1.6rem;
   max-width: 400px;
-  min-width: 50svw;
+  min-width: 375px;
   border-radius: 8px;
   border: 1px solid #fff;
 
-  min-height: 40svh;
+    button[type="submit"] { 
+      margin-top: 1.4rem;
+    }
 
   header {
     display: flex;

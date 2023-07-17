@@ -1,24 +1,14 @@
 'use client'
 
+import Image from "next/image";
 import { Button } from '@/components/button'
 import { Header } from '@/components/header'
-import Image from 'next/image'
 import Link from 'next/link'
-import { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
 import { CreateCharacterModal } from './create-character-modal'
 import { Hoverable } from '@/styles'
+import { Card, CardContainer } from '@/components/card'
 
-const CardContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  > * {
-    margin-bottom: 1.5rem;
-  }
-`
 const CreateCharacterPage = styled.section`
   width: 100%;
   display: flex;
@@ -45,7 +35,6 @@ const CreateCharacterPage = styled.section`
     }
   }
 
-
   @media only screen and (max-width: 800px) {
     flex-direction: column;
     
@@ -54,33 +43,6 @@ const CreateCharacterPage = styled.section`
       }
   }
 `
-
-type CardProps = {
-  title: string
-  illustration?: string
-  body?: ReactNode
-  footer?: ReactNode
-  onClick: () => void
-}
-
-const Card: FunctionComponent<CardProps> = ({
-  title,
-  illustration,
-  body,
-  footer,
-  onClick,
-}) => {
-  return (
-    <CardContainer onClick={onClick}>
-      <h3>{title}</h3>
-      {illustration && (
-        <Image src={illustration} width='300' height='250' alt='' />
-      )}
-      {body}
-      {footer && <>{footer}</>}
-    </CardContainer>
-  )
-}
 
 export default function Page() {
   return (
@@ -97,38 +59,36 @@ export default function Page() {
             document.getElementById('import').showModal()
           }}
           title='Import from HiScores'
-          illustration='/illustrations/maxed-nerd.svg'
-          body={
-            <p>
-              Already have a RuneScape character? This will import your skills
-              as well as boss statistics
-            </p>
-          }
+          image={<Image src='/illustrations/maxed-nerd.svg' alt="lmao look at this noob" width="325" height="250" />}
           footer={
             <Button>
               <span>Import from HiScores</span>
             </Button>
           }
-        />
+        >
+          <p>
+            Already have a RuneScape character? This will import your skills
+            as well as boss statistics
+          </p>
+        </Card>
         <Card
           title='From scratch'
-          illustration='/illustrations/noob.svg'
+          image={<Image src='/illustrations/noob.svg' alt="lmao look at this noob" width="325" height="250" />}
           onClick={() => {
             // @ts-expect-error React doesn't understand native modals yet
             document.getElementById('create').showModal()
           }}
-          body={
-            <p>
-              Enables you to explore account builds, or plan out a new account
-            </p>
-          }
           footer={
             <Button>
               <span>Create from scratch</span>
             </Button>
           }
-        />
-      </CreateCharacterPage>
+        >
+          <p>
+            Enables you to explore account builds, or plan out a new account
+          </p>
+        </Card>
+      </CreateCharacterPage >
       <CreateCharacterModal
         mode='import'
         id='import'

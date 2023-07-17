@@ -121,6 +121,4 @@
       }
     })
   })
-
-  console.log(data)
 })();

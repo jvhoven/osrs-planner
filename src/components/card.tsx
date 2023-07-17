@@ -5,6 +5,9 @@ import styled from "styled-components";
 export const CardContainer = styled.div`
   ${Hoverable}
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   border: 1px solid white;
   box-sizing: border-box;
@@ -15,45 +18,60 @@ export const CardContainer = styled.div`
       align-items: center;
       justify-content: center;
       padding: 1rem 0;
-      width: 100%;
-      height: 175px;
-      border-bottom: 1px solid white;
     }
-
-  img {
-    width: auto;
-    height: 100%;
-  }
+  
+  h3 {
+      margin-bottom: 1rem;
+    }
 
   .content {
     padding: 1rem;
   }
 
-  &:hover {
-    .image {
-        border-bottom: 1px solid black;
-      }
-
-      border: 1px solid black;
-  }
+  .footer {
+      flex: 1;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+flex-direction: column;
+    }
 `
 
-type Props = {
-  title: string;
-  image: ReactNode;
+type CardProps = {
+  title?: string
+  image?: ReactNode;
+  children?: ReactNode
+  footer?: ReactNode
+  onClick?: () => void
 }
 
-export const Card: FC<Props> = ({ image, title }) => {
+export const Card: FC<CardProps> = ({
+  title,
+  image,
+  children,
+  footer,
+  onClick,
+}) => {
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick}>
+      {title && (<h3 className="title">{title}</h3>)}
       {image && (
         <div className="image">
           {image}
         </div>
       )}
-      <div className="content">
-        {title}
-      </div>
-    </CardContainer>
+      {children && (
+        <div className="content">
+          {children}
+        </div>
+      )}
+
+      {footer && (
+        <div className="footer">{footer}</div>
+      )}
+    </CardContainer >
   )
 }
+
+
+

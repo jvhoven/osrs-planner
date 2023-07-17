@@ -4,7 +4,7 @@ import { useCharacter } from "../hooks/useCharacter"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { db } from "@/models/db"
 import { Modal } from "@/components/modal"
-import { FormBlock, Form } from "@/components/forms"
+import { FormBlock, Form, Input, Select } from "@/components/forms"
 import { FORMATTED_GAMEMODE_NAMES, GAMEMODES } from "@/lib/constants"
 import { Button } from "@/components/button"
 import { useRouter } from "next/navigation"
@@ -63,18 +63,18 @@ export const CreateCharacterModal: FunctionComponent<CreateCharacterModalProps> 
           <label htmlFor='rsn'>
             {mode === 'import' ? 'RSN' : 'Character name'}
           </label>
-          <input type='text' {...register('rsn', { required: true })} />
+          <Input type='text' {...register('rsn', { required: true })} />
           {errors.rsn && <span>This field is required</span>}
         </FormBlock>
         <FormBlock>
           <label htmlFor='gamemode'>Gamemode</label>
-          <select {...register('gamemode')}>
+          <Select {...register('gamemode')}>
             {GAMEMODES.map((gamemode) => (
               <option key={gamemode} value={gamemode}>
                 {FORMATTED_GAMEMODE_NAMES[gamemode]}
               </option>
             ))}
-          </select>
+          </Select>
           {errors.gamemode && <span>This field is required</span>}
         </FormBlock>
         <Button type='submit'>
