@@ -45,6 +45,7 @@ export const CreateCharacterModal: FunctionComponent<CreateCharacterModalProps> 
   }
 
   useEffect(() => {
+    console.log("Why does this run twice?")
     if (stats && formState.rsn && formState.gamemode && mode === 'import') {
       db.characters.add({
         stats,
@@ -54,7 +55,7 @@ export const CreateCharacterModal: FunctionComponent<CreateCharacterModalProps> 
         router.push(`/characters/${id}`);
       });
     }
-  }, [stats?.skills.overall.level, formState.rsn, formState.gamemode, mode, router, stats])
+  }, [stats?.skills.overall.level, formState.rsn, formState.gamemode])
 
   return (
     <Modal id={id} title={title}>
