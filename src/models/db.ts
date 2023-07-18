@@ -1,18 +1,20 @@
 import Dexie, { Table } from "dexie";
 
 import { populate } from "./populate";
-import { Character } from "@/lib/types";
+import { Character, Inventory } from "@/lib/types";
 import { Item } from "@/lib/item";
 
 class Database extends Dexie {
   public characters!: Table<Character, number>;
   public items!: Table<Item, number>;
+  public inventories!: Table<Inventory, number>;
 
   constructor() {
     super("osrs-planner");
     this.version(4).stores({
       characters: "++id,rsn,gamemode,stats",
-      items: "&id,name"
+      items: "&id,name",
+      inventories: "++id,character_id,items"
     });
   }
 }

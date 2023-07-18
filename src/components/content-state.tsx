@@ -47,7 +47,6 @@ type Props<T> = {
 }
 
 export function ContentState<T>(props: Props<T>) {
-
   return (
     <ErrorBoundary
       fallback={

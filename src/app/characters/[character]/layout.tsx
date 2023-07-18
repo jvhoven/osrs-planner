@@ -4,6 +4,7 @@ import { AccountNameContainer } from "@/components/account-name";
 import { Button } from "@/components/button";
 import { Header } from "@/components/header";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
@@ -34,34 +35,59 @@ const Menu = styled.aside`
     padding: 0;
     margin-bottom: 1rem;
 
-    li {
+    > li {
       width: 100%;
       margin-bottom: 1rem;
       display: block;
       list-style: none;
       border-radius: 8px;
+      position: relative;
 
-      button {
+      &.active {
+        button {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      > button {
         text-align: left;
         width: 100%;
       }
-    }
-  }
 
-  @media only screen and (max-width: 600px) {
-    ul {
-      flex-direction: row;
+      ul {
+        position: relative;
+          margin-bottom: 0;
     
-      li {
-        margin-right: 1rem;
-
-        button {
-            text-align: center;
+        li {
+          margin-bottom: 0;
+          &:first-child {
+              margin-top: 0px;
+            button {
+              border-top-left-radius: 0;
+              border-top-right-radius: 0;
+              border-top: 0;
+            }
           }
 
-        &:last-child {
-            margin-right: 0;
-          }
+          &:last-child {
+            button {
+              border-bottom-left-radius: 6px;
+              border-bottom-right-radius: 6px;
+            }
+            }
+
+          button {
+              a {
+                &:before {
+                    content: '●';
+                    font-size: 8px;
+                    margin-right: 1rem;
+                  }
+                }
+            }
+        }
+        
       }
     }
   }
@@ -76,6 +102,8 @@ const CharacterLayoutContainer = styled.div`
 `
 
 export default function CharacterLayout({ children, params: { character } }: { children: ReactNode, params: { character: string } }) {
+  const pathname = usePathname();
+
   return (
     <CharacterLayoutContainer>
       <Header title='Character'>
@@ -91,10 +119,19 @@ export default function CharacterLayout({ children, params: { character } }: { c
                 <Link href={`/characters/${character}/skills`}>Skills</Link>
               </Button>
             </li>
-            <li>
+            <li className={pathname.match(/equipment/) !== null ? "active" : ""}>
               <Button>
-                <Link href={`/characters/${character}/items`}>Items</Link>
+                <Link href={`/characters/${character}/equipment`}>Equipment</Link>
               </Button>
+              {pathname.match(/equipment/) !== null && (
+                <ul>
+                  <li>
+                    <Button>
+                      <Link href={`/characters/${character}/equipment/loadouts`}>Loadouts</Link>
+                    </Button>
+                  </li>
+                </ul>
+              )}
             </li>
             <li>
               <Button>

@@ -1,14 +1,14 @@
 "use client"
 
-import { AccountName } from "@/components/account-name"
-import { Character } from "../../components/character"
-import { Gear, GearProps } from "@/components/inventory/gear"
-import { Inventory, InventoryProps } from "@/components/inventory/inventory"
-import { Item } from "@/lib/item"
-import { EquippableSlots } from "@/lib/types"
-import dynamic from "next/dynamic"
-import React, { useState } from "react"
-import { InventoryPageContainer } from "./styled"
+import { Character } from '@/app/characters/components/character';
+import { AccountName } from '@/components/account-name';
+import { Gear, GearProps } from '@/components/inventory/gear';
+import { Inventory, InventoryProps } from '@/components/inventory/inventory';
+import { Item } from '@/lib/item';
+import { EquippableSlots } from '@/lib/types';
+import dynamic from 'next/dynamic';
+import { useState } from 'react';
+import { LoadoutsPageContainer } from './styled';
 
 const ItemFinder = dynamic(() => import('@/components/item-finder'), { ssr: false });
 
@@ -47,14 +47,14 @@ export default function Page({ params }: { params: { character: number } }) {
   return (
     <Character id={params.character}>
       {({ gamemode, rsn }) =>
-        <InventoryPageContainer>
+        <LoadoutsPageContainer>
           <AccountName rsn={rsn} gamemode={gamemode} />
           <ItemFinder onSelect={onSelect} />
           <div className="wrapper">
             <Gear equipped={loadout.equipped} />
             <Inventory items={loadout.inventory} />
           </div>
-        </InventoryPageContainer>
+        </LoadoutsPageContainer>
       }
     </Character>
   )

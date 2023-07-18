@@ -1,7 +1,6 @@
 import { ACTIVITIES, BH_MODES, BOSSES, CLUES, SKILLS, GAMEMODES } from "./constants";
 import { Item } from "./item";
 
-
 export type EquippableSlots = Exclude<Required<Item["equipment"]>["slot"], "2h">;
 export type Gamemode = typeof GAMEMODES[number];
 export type SkillName = typeof SKILLS[number];
@@ -13,6 +12,12 @@ export type BH = { [Type in BHType]: Activity };
 export type Boss = typeof BOSSES[number];
 export type Bosses = { [Type in Boss]: Activity };
 export type ActivityName = typeof ACTIVITIES[number];
+
+export type Inventory = {
+  id?: number;
+  character_id: number;
+  items: Item[];
+}
 
 export type Character = {
   id?: number;

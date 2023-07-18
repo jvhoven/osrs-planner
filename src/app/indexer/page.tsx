@@ -14,7 +14,7 @@ const IndexerPageContainer = styled.div`
   text-align: center;
   margin-top: 5rem;
   min-height: 40svh;
-  width: 50%;
+  min-width: 50%;
 
   h2 {
       margin-bottom: 1rem;

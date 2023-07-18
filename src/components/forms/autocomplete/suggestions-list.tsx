@@ -63,7 +63,7 @@ const SuggestionList = <T,>({ suggestions, labelFor, keyFor, activeSuggestion, o
 
         setTimeout(() => {
           keepInView();
-        }, 100)
+        }, 1000)
 
         return (
           <li className={className} key={keyFor(suggestion)} onClick={() => onClick(suggestion)}>

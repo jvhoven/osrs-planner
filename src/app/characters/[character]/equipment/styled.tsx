@@ -1,3 +1,4 @@
+import { InventoryContainer } from "@/components/inventory/styles"
 import styled from "styled-components"
 
 export const InventoryPageContainer = styled.div`

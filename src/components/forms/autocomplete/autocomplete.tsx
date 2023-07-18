@@ -9,11 +9,10 @@ const AutocompleteListContainer = styled.div`
   width: 100%;
   
   input {
-      width: 100%;
-      height: 48px;
-      margin-bottom: 1rem;
-    }
-
+    width: 100%;
+    height: 48px;
+    margin-bottom: 1rem;
+  }
 `
 
 type AutoCompleteState<T> = { activeSuggestion: number, filteredSuggestions: T[], showSuggestions: boolean, selected?: T, userInput: string };
@@ -54,6 +53,8 @@ const AutoComplete = <T,>({ suggestions, onSelect, labelFor, keyFor }: AutoCompl
     const { activeSuggestion, filteredSuggestions } = state;
 
     if (e.key === 'Enter') {
+      if (filteredSuggestions.length === 0) return;
+
       setState({
         activeSuggestion: 0,
         showSuggestions: false,
@@ -95,7 +96,7 @@ const AutoComplete = <T,>({ suggestions, onSelect, labelFor, keyFor }: AutoCompl
 
   return (
     <AutocompleteListContainer>
-      <Input autoComplete="off" placeholder="Search for item, e.g. Tumeken's Shadow" onChange={onChange} onKeyDown={onKeyDown} value={state.userInput} />
+      <Input autoComplete="off" placeholder="Search for items, e.g. Tumeken's Shadow" onChange={onChange} onKeyDown={onKeyDown} value={state.userInput} />
       {state.userInput && state.showSuggestions && (
         <SuggestionList
           suggestions={state.filteredSuggestions}
