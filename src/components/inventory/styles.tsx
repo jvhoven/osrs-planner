@@ -1,26 +1,31 @@
 import { Hoverable } from "@/styles";
 import styled from "styled-components";
-import { Grid } from "../grid";
 
 export const InventoryContainer = styled.div`
+  width: 100%;
   align-self: flex-end;
+  display: grid;
 
-  ${Grid} {
-    div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+  grid-auto-columns: minmax(55px, 1fr);
+  grid-gap: 1rem;
 
-      ${Hoverable}
-      width: 100%;
-      height: 55px;
-      border: 1px solid white;
-      border-radius: 6px;
+  div {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      img {
-        width: auto;
-        height: 35px;
-      }
+    ${Hoverable}
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 0.5rem;
+
+    img {
+      width: auto;
+      height: 75%;
     }
   }
 `
@@ -28,10 +33,11 @@ export const InventoryContainer = styled.div`
 export const ArmourSetupContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  flex: 0.8;
+  flex: 1;
 
   .items {
     width: 250px;
+    max-height: 500px;
     display: grid;
     grid-template-areas:
       'head head head'
@@ -48,8 +54,8 @@ export const ArmourSetupContainer = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      aspect-ratio: 1 / 1;
       width: 75px;
-      height: 75px;
       border: 1px solid white;
       border-radius: 6px;
 

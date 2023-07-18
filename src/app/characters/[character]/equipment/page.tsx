@@ -15,7 +15,7 @@ const ItemFinder = dynamic(() => import('@/components/item-finder'), { ssr: fals
 export default function Page({ params }: { params: { character: number } }) {
   const inventory = useLiveQuery(
     () => db.inventories.get({ character_id: Number(params.character) }),
-    [params.character]
+    [params.character],
   );
 
   const onSelect = (item: Item) => {
@@ -34,21 +34,15 @@ export default function Page({ params }: { params: { character: number } }) {
           <ItemFinder
             onSelect={onSelect}
             query={() => db.items
-              .where('id')
-              // @ts-expect-error
-              .noneOf(...(inventory?.items ?? []).map(item => item.id))
-              .and(item => item.equipable_by_player)
+              .filter(item => item.equipable_by_player)
               .toArray()
             }
           />
           <div className="wrapper">
             <Inventory
-              size={120}
+              expandable
+              size={36}
               items={inventory?.items ?? []}
-              columns={{
-                count: 12,
-                size: "55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px"
-              }}
             />
           </div>
         </InventoryPageContainer>
