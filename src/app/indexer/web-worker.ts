@@ -31,6 +31,7 @@ self.addEventListener('message', () => {
       });
 
       db.items.bulkAdd(
+        // @ts-expect-error - 
         Object.entries(items).flatMap(([, { name, id, ...rest }]) => {
           if (rest.duplicate) return [];
 
