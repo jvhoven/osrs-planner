@@ -107,7 +107,12 @@ export async function populate() {
           "vorkath": { "rank": 304866, "score": 121 },
           "wintertodt": { "rank": 910090, "score": 42 },
           "zalcano": { "rank": -1, "score": -1 },
-          "zulrah": { "rank": 256424, "score": 148 }
+          "zulrah": { "rank": 256424, "score": 148 },
+          "theLeviathan": { "rank": -1, "score": -1 },
+          "theWhisperer": { "rank": -1, "score": -1 },
+          "scurrius": { "rank": -1, "score": -1 },
+          "dukeSucellus": { "rank": -1, "score": -1 },
+          "vardorvis": { "rank": -1, "score": -1 },
         }
       },
     }
