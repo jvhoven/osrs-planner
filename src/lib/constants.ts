@@ -147,7 +147,12 @@ export const BOSSES = [
   'vorkath',
   'wintertodt',
   'zalcano',
-  'zulrah'
+  'zulrah',
+  'theWhisperer',
+  'dukeSucellus',
+  'vardorvis',
+  'theLeviathan',
+  'scurrius'
 ] as const;
 
 export const ACTIVITIES = [
@@ -228,7 +233,12 @@ export const FORMATTED_BOSS_NAMES: FormattedBossNames = {
   vorkath: 'Vorkath',
   wintertodt: 'Wintertodt',
   zalcano: 'Zalcano',
-  zulrah: 'Zulrah'
+  zulrah: 'Zulrah',
+  scurrius: 'Scurrius',
+  theWhisperer: 'The Whisperer',
+  dukeSucellus: 'Duke Sucellus',
+  vardorvis: 'Vardorvis',
+  theLeviathan: 'The Leviathan'
 };
 
 

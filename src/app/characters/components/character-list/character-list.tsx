@@ -28,6 +28,7 @@ export const CharacterList: FunctionComponent = () => {
           style={{ opacity: '0.2', marginBottom: '1rem' }}
         />
         <h4>You have not created any characters yet</h4>
+        <br />
         <Button>
           <Link href='/characters/create'>Create a character</Link>
         </Button>
