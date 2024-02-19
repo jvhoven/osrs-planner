@@ -2,7 +2,7 @@
 
 import { AccountName } from "@/components/account-name"
 import { Character } from "../../components/character"
-import { Item } from "@/lib/item"
+import { Item } from "@/lib/generated/item"
 import dynamic from "next/dynamic"
 import React from "react"
 import { InventoryPageContainer } from "./styled"

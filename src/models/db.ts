@@ -2,7 +2,7 @@ import Dexie, { Table } from "dexie";
 
 import { populate } from "./populate";
 import { Character, Inventory } from "@/lib/types";
-import { Item } from "@/lib/item";
+import { Item } from "@/lib/generated/item";
 
 class Database extends Dexie {
   public characters!: Table<Character, number>;
