@@ -28,30 +28,23 @@ export const useCharacter = () => {
       parsed.length !==
       SKILLS.length + BH_MODES.length + CLUES.length + BOSSES.length + 5
     ) {
-      throw Error("Invalid format");
+      console.warn('Invalid stats response, this probably means that new content/hiscores has been added without the parsing logic to be updated', parsed);	
     }
 
     const skillObjects: Skill[] = parsed
       .filter((stat) => stat.length === 3)
-      .map(([rank, level, xp]) => {
-        const skill: Skill = {
+      .map(([rank, level, xp]) => ({
           rank: parseInt(rank, 10),
           level: parseInt(level, 10),
           xp: parseInt(xp, 10)
-        };
-        return skill;
-      });
+      }));
 
     const activityObjects: Activity[] = parsed
       .filter((stat) => stat.length === 2)
-      .map((stat) => {
-        const [rank, score] = stat;
-        const activity: Activity = {
+      .map(([rank, score]) => ({
           rank: parseInt(rank, 10),
           score: parseInt(score, 10)
-        };
-        return activity;
-      });
+      }));
 
     const [leaguePoints] = activityObjects.splice(0, 1);
     const bhObjects = activityObjects.splice(0, BH_MODES.length);
@@ -63,7 +56,6 @@ export const useCharacter = () => {
       riftsClosed
     ] = activityObjects.splice(0, 4);
     const bossObjects = activityObjects.splice(0, BOSSES.length);
-
 
     const skills: Skills = skillObjects.reduce<Skills>((prev, curr, index) => {
       const newSkills = { ...prev };

@@ -24,7 +24,6 @@ self.addEventListener('message', () => {
 
       const items: Record<string, Item>[] = await fetch("https://raw.githubusercontent.com/0xNeffarion/osrsreboxed-db/master/docs/items-complete.json").then((response) => response.json());
 
-
       postMessage({
         category: 'Item data',
         message: "writing item data to database",
