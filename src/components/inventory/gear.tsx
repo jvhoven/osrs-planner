@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ITEM_SLOT } from "@/lib/constants";
 import { Bonuses } from "@/lib/types";
-import { Item } from "@/lib/item";
+import { Item } from "@/lib/generated/item";
 import { FC } from "react";
 
 import { ArmourSetupContainer } from "./styles";

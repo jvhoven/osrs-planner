@@ -1,4 +1,4 @@
-import { Item } from "@/lib/item";
+import { Item } from "@/lib/generated/item";
 import { db } from "@/models/db"
 import { Message } from "./types";
 
@@ -31,7 +31,6 @@ self.addEventListener('message', () => {
       });
 
       db.items.bulkAdd(
-        // @ts-expect-error
         Object.entries(items).flatMap(([, { name, id, ...rest }]) => {
           if (rest.duplicate) return [];
 

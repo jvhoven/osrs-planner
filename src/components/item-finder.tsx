@@ -1,4 +1,4 @@
-import { Item } from "@/lib/item";
+import { Item } from "@/lib/generated/item";
 import { db } from "@/models/db";
 import { useLiveQuery } from "dexie-react-hooks";
 import { AutoComplete } from "./forms";

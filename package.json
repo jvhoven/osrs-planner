@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "json2ts ./src/schemas/item.jsonschema.json > ./src/lib/item.ts --unreachableDefinitions",
+    "prepare": "json2ts ./src/schemas/item.jsonschema.json > ./src/lib/generated/item.ts --unreachableDefinitions && json2ts ./src/schemas/inventorysetups.jsonschema.json > ./src/lib/generated/inventorysetups.ts --unreachableDefinitions",
     "postinstall": "yarn prepare"
   },
   "packageManager": "yarn@3.6.0",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Item } from "@/lib/item";
+import { Item } from "@/lib/generated/item";
 import { FC } from "react";
 
 import { InventoryContainer } from "./styles";

@@ -1,4 +1,4 @@
-import { Item } from './item';
+import { Item } from './generated/item';
 import {
   BHType,
   Boss,
